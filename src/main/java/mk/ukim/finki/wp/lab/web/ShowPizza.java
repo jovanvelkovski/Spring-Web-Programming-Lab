@@ -29,17 +29,9 @@ public class ShowPizza extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         WebContext webContext = new WebContext(req, resp, req.getServletContext());
-        HttpSession session = req.getSession();
         List<Pizza> pizzas = pizzaServiceimpl.listPizzas();
-
-//        String pizzaType = session.getAttribute("newPizzaType").toString();
-//        String pizzaSize = session.getAttribute("newPizzaSize").toString();
-//
-//        if(pizzaType != null && pizzaSize != null){
-//            pizzas.add(new Pizza(pizzaType, pizzaSize));
-//        }
 
         webContext.setVariable("pizzas", pizzas);
         webContext.setVariable("message", req.getSession().getAttribute("message"));
@@ -47,7 +39,7 @@ public class ShowPizza extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         HttpSession session = req.getSession();
 
         if(req.getParameter("newPizzaName") != null && req.getParameter("newPizzaDescription") != null){
@@ -59,7 +51,6 @@ public class ShowPizza extends HttpServlet {
 
         Order order = new Order();
         order.setPizzaType(req.getParameter("pizza"));
-        //session.setAttribute("pizza", req.getParameter("pizza"));
         session.setAttribute("order", order);
         resp.sendRedirect("/selectPizza.do");
     }
