@@ -1,0 +1,56 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title>Pizza Order page - Welcome and choose pizza</title>
+    <style type="text/css">
+        body {
+            width: 800px;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Welcome to our Pizza Delivery App</h1>
+</header>
+<main>
+    <h2>Choose pizza:</h2>
+    <form th:action="@{/}" method="POST">
+        <th:block th:each="pizza:${pizzas}">
+            <input th:type="radio" th:name="pizza" th:value="${pizza.name}">
+            <label th:for="${pizza.name}"  th:text="${pizza.name} + ' (' + ${pizza.description} + ')'" th:value="${pizza.name}" ></label>
+            <br>
+        </th:block>
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+
+
+    <div>
+        <br>
+        <label style="font-size: 20px; color: red"th:text="${message}"></label>
+        <br><br><br>
+    </div>
+
+    <form th:action="@{/}" method="POST">
+        <table border="1px solid black">
+            <tr>
+                <th colspan="2">
+                    Insert new pizza
+                </th>
+            </tr>
+
+            <tr>
+                <td><b>Pizza Name</b></td>
+                <td><input type="text" name="newPizzaName"></td>
+            </tr>
+            <tr>
+                <td><b>Pizza Description</b></td>
+                <td><input type="text" name="newPizzaDescription"></td>
+            </tr>
+        </table>
+        <input type="submit" value="Submit">
+    </form>
+</main>
+</body>
+</html>
