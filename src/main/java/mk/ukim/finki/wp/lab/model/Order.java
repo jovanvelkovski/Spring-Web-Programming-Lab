@@ -2,6 +2,8 @@ package mk.ukim.finki.wp.lab.model;
 
 import lombok.*;
 
+import javax.persistence.Id;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -10,6 +12,7 @@ public class Order {
     private String pizzaSize;
     private String clientName;
     private String clientAddress;
+    @Id
     private long orderId;
 
 

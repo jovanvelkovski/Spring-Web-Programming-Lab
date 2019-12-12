@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebFilter
+@Profile("joco")
 public class PizzaFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -35,7 +36,9 @@ public class PizzaFilter implements Filter {
             pizzaType = o.getPizzaType();
         }
 
-        if (!"".equals(path) && (pizzaType == null || pizzaType.isEmpty())) {
+
+        if (!"".equals(path) && (pizzaType == null || pizzaType.isEmpty()))
+        {
             session.setAttribute("message", "Select a pizza!");
             resp.sendRedirect("");
         }
