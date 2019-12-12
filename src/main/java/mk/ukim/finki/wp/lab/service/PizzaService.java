@@ -16,4 +16,5 @@ public interface PizzaService {
     Pizza getPizza(String name);
     List<Pizza> getAllPizzasWithIngredients(int totalIngredients);
     List<Ingredient> getMutualIngredientsOfPizzas(String name1, String name2) throws Exception;
+    List<Pizza> getAllPizzasWithSpicyIngredient(Boolean spicy);
 }

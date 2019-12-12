@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class PizzaRepository {
@@ -58,7 +59,7 @@ public class PizzaRepository {
     public List<Pizza> getAllPizzasWithIngredients(int totalIngredients) {
         List<Pizza> pizzas = pizzaRepositoryJpa.findAll();
 
-        List<Pizza> result = new ArrayList<Pizza>();
+        List<Pizza> result = new ArrayList<>();
         for (Pizza p : pizzas)
             if (p.getIngredients().size() < totalIngredients)
                 result.add(p);
@@ -74,6 +75,31 @@ public class PizzaRepository {
         for (Ingredient i : pizza1.getIngredients()) {
             if (pizza2.getIngredients().contains(i))
                 result.add(i);
+        }
+        return result;
+    }
+
+    public List<Pizza> getAllPizzasWithSpicyIngredient(Boolean spicy) {
+        List<Pizza> lista = pizzaRepositoryJpa.findAll();
+        List<Pizza> result = new LinkedList<>();
+        if(spicy){
+        for(Pizza p : lista){
+            for(Ingredient i : p.getIngredients()){
+                if(i.isSpicy()){
+                    result.add(p);
+                    break;
+                }
+            }
+        }}
+        else{
+            for(Pizza p : lista){
+                for(Ingredient i : p.getIngredients()){
+                    if(!i.isSpicy()){
+                        result.add(p);
+                        break;
+                    }
+                }
+            }
         }
         return result;
     }

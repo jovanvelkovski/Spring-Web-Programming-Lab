@@ -64,4 +64,9 @@ public class PizzaServiceimpl implements PizzaService {
     public List<Ingredient> getMutualIngredientsOfPizzas(String name1, String name2) throws Exception {
         return pizzaRepository.getMutualIngredientsOfPizzas(name1, name2);
     }
+
+    @Override
+    public List<Pizza> getAllPizzasWithSpicyIngredient(Boolean spicy) {
+        return pizzaRepository.getAllPizzasWithSpicyIngredient(spicy);
+    }
 }

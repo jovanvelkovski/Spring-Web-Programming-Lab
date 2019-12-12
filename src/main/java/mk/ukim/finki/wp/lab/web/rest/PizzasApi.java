@@ -15,7 +15,7 @@ import java.util.List;
 @RequestMapping(path = "/pizzas",produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
 public class PizzasApi {
 
-    PizzaServiceimpl pizzaService;
+    private PizzaServiceimpl pizzaService;
 
     public PizzasApi(PizzaServiceimpl pizzaService){
         this.pizzaService=pizzaService;
@@ -48,6 +48,10 @@ public class PizzasApi {
         return pizzaService.getPizza(name);
     }
 
+    @GetMapping(params = "spicy")
+    public List<Pizza> getAllPizzasWithSpicyIngredient(@RequestParam Boolean spicy){
+        return pizzaService.getAllPizzasWithSpicyIngredient(spicy);
+    }
 
     @GetMapping
     public Page<Pizza> getAllIngredients(){
